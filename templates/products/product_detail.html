@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+  <a href="{% url 'products:index' %}">На главную</a>
+  <h1>{{ product.name }}</h1>
+    <p>Цена: {{ product.price }} руб.</p>
+    <p>Описание: {{ product.description }}</p>
+    <p>Категория: <a href="{% url 'products:products_of_category' product.category_id %}">{{ product.category_id }}</a></p>
+</body>
+</html>
