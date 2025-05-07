@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name }}</title>
+</head>
+<body>
+    <h1>Продукты категории {{ category.name }}</h1>
+    <p>{{ category.description }}</p>
+
+    <h2>Список продуктов</h2>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - {{ product.price }} руб. (<a href="{% url 'products:product_detail' product.id %}">подробнее</a>)</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
