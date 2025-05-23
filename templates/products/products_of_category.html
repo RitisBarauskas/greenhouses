@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Фильмы в жанре: {{ category.name }}
+    Продукты категории: {{ category.name }}
 {% endblock %}
 
 {% block header %}
-    Фильмы в жанре: {{ category.name }}
+    Продукты категории: {{ category.name }}
 {% endblock %}
 
 {% block content %}
-    {% for movie in movies %}
-        {% include 'movies/includes/movie.html' %}
+    {% for product in products %}
+        {% include 'products/includes/product.html' %}
     {% endfor %}
 {% endblock %}

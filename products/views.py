@@ -1,52 +1,39 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, DetailView
 
-from products.constants import DATABASE
-
-
-def index(request):
-    products = DATABASE.get('products', [])
-    context = {
-        'products': products,
-    }
-    return render(request, 'index.html', context)
+from products.models import Product, Category, Tag
 
 
-def product_detail(request, product_id):
-    products = DATABASE.get('products', [])
-    product = None
-    for item in products:
-        if item['id'] == product_id:
-            product = item
-            break
-
-    if product is None:
-        return HttpResponse('Product not found', status=404)
-
-    context = {
-        'product': product,
-    }
-
-    return render(request, 'products/product_detail.html', context)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'index.html'
+    context_object_name = 'products'
+    queryset = Product.objects.all()
 
 
-def products_of_category(request, category_id):
-    categories = DATABASE.get('categories', [])
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/product_detail.html'
+    context_object_name = 'product'
+    pk_url_kwarg = 'product_id'
+
+
+class ProductsCategoryListView(ListView):
+    template_name = 'products/products_of_category.html'
+    context_object_name = 'products'
     category = None
-    for item in categories:
-        if item['id'] == category_id:
-            category = item
-            break
 
-    if category is None:
-        return HttpResponse('Category not found', status=404)
+    def _load_category(self):
+        if self.category is None:
+            category_id = self.kwargs.get('category_id')
+            self.category = get_object_or_404(Category, id=category_id)
 
-    products = DATABASE.get('products', [])
-    filtered_products = [product for product in products if product['category_id'] == category_id]
+    def get_queryset(self):
+        self._load_category()
+        return self.category.products.all()
 
-    context = {
-        'category': category,
-        'products': filtered_products,
-    }
-
-    return render(request, 'products/products_of_category.html', context)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self._load_category()
+        context['category'] = self.category
+        return context

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Фильм {{ movie.title|truncatechars:5 }}
+    Продукт {{ product.name }}
 {% endblock %}
 
 {% block header %}
-    {{ movie.title }} ({{ movie.year }})
+    {{ product.name }}
 {% endblock %}
 
 {% block content %}
-    Фильм {{ movie.title }} вышел в {{ movie.year }}
-    <br>Его снял {{ movie.director.name }}
+    {{ product.name }} растет {{ product.time_to_grow }} дней.
+    <br>Полезная информация о нем: {{ product.description }}
 {% endblock %}
