@@ -11,7 +11,6 @@ class ProductListView(ListView):
     model = Product
     template_name = 'index.html'
     context_object_name = 'products'
-    queryset = Product.objects.all()
 
 
 class ProductDetailView(DetailView):
@@ -58,4 +57,3 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('products:product_detail', kwargs={'product_id': self.object.id})
-
