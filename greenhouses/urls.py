@@ -12,7 +12,7 @@ auth_patterns = [
         CreateView.as_view(
             template_name='registration/registration_form.html',
             form_class=UserCreationForm,
-            success_url=reverse_lazy('movies:main'),
+            success_url=reverse_lazy('products:index'),
         ),
         name='registration',
     ),

@@ -3,4 +3,6 @@
     <p>Цена: {{ product.price }} руб.</p>
     <p>Описание: {{ product.description }}</p>
     <p>Категория: <a href="{% url 'products:products_of_category' product.category_id %}">{{ product.category_id }}</a></p>
+    <p>Время роста: {{ product.time_to_grow }} дней</p>
+    <p><a href="{% url 'products:product_detail' product.id %}">Подробнее</a>
 </article>

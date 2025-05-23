@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    Добавить продукт
+{% endblock %}
+
+{% block header %}
+    Добавить продукт
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit">Добавить</button>
+  </form>
+{% endblock %}

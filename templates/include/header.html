@@ -21,11 +21,14 @@
           {% if user.is_authenticated %}
             <div class="btn-group" role="group" aria-label="Basic outlined example">
               <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
-                  href="">Добавить продукт</a></button>
+                  href="{% url 'products:product_create' %}">Добавить продукт</a></button>
               <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
                   href="">Посадить в теплицу</a></button>
-              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
-                  href="{% url 'logout' %}">Выйти</a></button>
+
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-primary">Выйти</button>
+              </form>
             </div>
           {% else %}
             <div class="btn-group" role="group" aria-label="Basic outlined example">
