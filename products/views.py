@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from constants import DATABASE
+from products.constants import DATABASE
 
 
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
     context = {
         'products': products,
     }
-    return render(request, 'products/index.html', context)
+    return render(request, 'index.html', context)
 
 
 def product_detail(request, product_id):

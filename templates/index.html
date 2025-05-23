@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Greenhouses
+{% endblock %}
+
+{% block header %}
+    Greenhouses
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        {% include 'products/includes/product.html' %}
+    {% endfor %}
+{% endblock %}

@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ category.name }}</title>
-</head>
-<body>
-    <h1>Продукты категории {{ category.name }}</h1>
-    <p>{{ category.description }}</p>
+{% extends 'base.html' %}
 
-    <h2>Список продуктов</h2>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }} руб. (<a href="{% url 'products:product_detail' product.id %}">подробнее</a>)</li>
-        {% endfor %}
-    </ul>
+{% block title %}
+    Фильмы в жанре: {{ category.name }}
+{% endblock %}
 
-</body>
-</html>
+{% block header %}
+    Фильмы в жанре: {{ category.name }}
+{% endblock %}
+
+{% block content %}
+    {% for movie in movies %}
+        {% include 'movies/includes/movie.html' %}
+    {% endfor %}
+{% endblock %}
