@@ -38,6 +38,14 @@ class Product(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, related_name='products')
     tags = models.ManyToManyField(Tag, verbose_name='Теги')
     time_to_grow = models.IntegerField(verbose_name='Время роста (в днях)')
+    creator = models.ForeignKey(
+        User,
+        verbose_name='Ответственное лицо',
+        on_delete=models.SET_NULL,
+        related_name='products',
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name_plural = 'Продукты'
